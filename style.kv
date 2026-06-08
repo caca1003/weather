@@ -1,0 +1,25 @@
+<WeatherScreen>:
+    
+    MDBoxLayout:
+        orientation:"vertical"
+        spacing:"20dp"
+        MDTopAppBar:
+            title: "Weather App"
+        MDBoxLayout:
+            spacing:"10dp"
+            size_hint: 0.9, None
+            pos_hint: {'center_x': 0.5}
+            MDTextField:
+                id: search_field
+                hint_text: "Введіть місто"
+                mode: "round"
+            MDIconButton:
+                icon: "magnify"
+                id: search_button
+                md_bg_color: app.theme_cls.primary_color
+        MDBoxLayout:
+            id: weather_info
+            orientftion:"vertical"
+            spacing:"10dp"
+            pos_hint: {'center_x': 0.5}
+            size_hint:0.9, 0.9
