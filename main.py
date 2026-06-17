@@ -8,7 +8,7 @@ import requests
 class WeatherScreen(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.search()
+        self.city="Попівці"
     def get_weather(self,city):
         params={
             "q":city,
@@ -19,8 +19,26 @@ class WeatherScreen(MDScreen):
         data=response.json()
         return data
     def search(self):
-        weather=self.get_weather("Львів")
-        print(weather)
+        try:
+            self.city=self.ids.search_field.text
+            weather=self.get_weather(self.city)
+            self.show_weather(weather)
+        except:
+            print("помилка під час пошуку погоди")
+
+    def show_weather(self, weather):
+        temp=weather ["main"]["temp"]
+        self.ids.temp_label.text=f"{round(temp)}°C"
+        text=weather["weather"][0]["description"]
+        self.ids.text_label.text=text
+        icon= weather["weather"][0]["icon"]
+        self.ids.icon.source=f"https://openweathermap.org/img/wn/{icon}@2x.png"
+        rain=weather["rain"]["1h"] if "rain" in weather else 0
+        self.ids.rain_label.text=f"Опади:{rain}мм"
+        wind=weather["wind"]["speed"]
+        self.ids.wind_label.text=f"Вітер:{wind}м/с"
+        humidity=weather["main"]["humidity"]
+        self.ids.humidity_label.text=f"Опади:{humidity}%"
 class WeatherApp(MDApp):
     def build(self):
         Builder.load_file("style.kv")

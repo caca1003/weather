@@ -17,9 +17,48 @@
                 icon: "magnify"
                 id: search_button
                 md_bg_color: app.theme_cls.primary_color
+                on_press:root.search()
         MDBoxLayout:
             id: weather_info
-            orientftion:"vertical"
-            spacing:"10dp"
+            orientation:"vertical"
+            spacing:"5dp"
             pos_hint: {'center_x': 0.5}
             size_hint:0.9, 0.9
+            Widget:
+                size_hint_y: None
+                height: "50dp"
+            MDLabel:
+                id: temp_label
+                text: ""
+                font_style: "H3"
+                halign: "center"
+            MDLabel:
+                id: text_label
+                text: ""
+                font_style: "Body1"
+                halign: "center"
+            AsyncImage:
+                id: icon 
+                source:""
+                size_hint:None, None
+                size:("150dp","150dp")
+                fit_mode:"contain"
+                pos_hint: {'center_x': 0.5}
+            MDLabel:
+                id: rain_label
+                text: ""
+                font_style: "Caption"
+                halign: "center"
+            MDLabel:
+                id: wind_label
+                text: ""
+                font_style: "Caption"
+                halign: "center"
+            MDLabel:
+                id: humidity_label
+                text: ""
+                font_style: "Caption"
+                halign: "center"
+            Widget:
+                size_hint_y: None
+                height: "50dp"
