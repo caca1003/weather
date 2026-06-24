@@ -3,8 +3,9 @@ from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
-from config import API_KEY,WEATHER_URL
+from config import API_KEY
 import requests
+WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather"
 class WeatherScreen(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

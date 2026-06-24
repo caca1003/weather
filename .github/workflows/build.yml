@@ -1,0 +1,41 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Отримання коду
+        uses: actions/checkout@v4
+
+      - name: Налаштування Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Створення config.py з секретів
+        run: |
+          echo "API_KEY = '${{ secrets.API_KEY }}'" > config.py
+          echo "WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'" >> config.py
+
+      - name: Встановлення системних залежностей
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+
+      - name: Встановлення Buildozer
+        run: pip install --upgrade buildozer cython virtualenv
+
+      - name: Збірка APK
+        run: yes | buildozer android debug
+
+      - name: Збереження готового файлу
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-apk
+          path: bin/*.apk
