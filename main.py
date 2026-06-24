@@ -38,7 +38,7 @@ class WeatherScreen(MDScreen):
         wind=weather["wind"]["speed"]
         self.ids.wind_label.text=f"Вітер:{wind}м/с"
         humidity=weather["main"]["humidity"]
-        self.ids.humidity_label.text=f"Опади:{humidity}%"
+        self.ids.humidity_label.text=f"Вологість:{humidity}%"
 class WeatherApp(MDApp):
     def build(self):
         Builder.load_file("style.kv")
